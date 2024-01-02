@@ -3,20 +3,28 @@
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "prettier"],
   "parserOptions": {
-    "createDefaultProgram": true
+    "createDefaultProgram": true,
+    "project": ["./tsconfig.json"]
   },
   "env": {
     "browser": true,
     "node": true,
     "es6": true
   },
+  "overrides": [
+    {
+      "files": ["next.config.js"],
+      "parserOptions": {
+        "project": null
+      }
+    }
+  ],
   "ignorePatterns": ["node_modules/"],
   "extends": [
-    "airbnb",
-    "airbnb-typescript",
-    "airbnb/hooks",
     "next/core-web-vitals",
+    "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
     "plugin:prettier/recommended",
     "prettier"
   ],
