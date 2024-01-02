@@ -7,16 +7,18 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset";
 }
 
-function Button({ id, className, children, onClick, type }: ButtonProps) {
+function Button({
+  id,
+  className,
+  children,
+  onClick,
+  type = "button",
+}: ButtonProps) {
   return (
     <button id={id} className={className} onMouseDown={onClick} type={type}>
       {children}
     </button>
   );
 }
-
-Button.defaultProps = {
-  id: undefined,
-};
 
 export default Button;
