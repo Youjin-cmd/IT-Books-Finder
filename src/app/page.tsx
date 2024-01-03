@@ -37,6 +37,7 @@ export default function Home() {
           return <Card key={crypto.randomUUID()} data={book} />;
         })}
       </Content>
+      <div>hey</div>
     </>
   );
 }
