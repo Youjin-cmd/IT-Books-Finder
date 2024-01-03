@@ -1,17 +1,17 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { IBook } from "@/types/type";
 
 import fetchITBook from "../utils/fetchITBook";
 import useIntersectionObserver from "../utils/useIntersectionObserver";
+import useBookStore from "@/store/book";
 
 import Content from "@/components/Content";
 import Card from "@/components/Card";
 import Loading from "@/shared/Loading";
 
 export default function Home() {
+  const { books, addBooks, keyword } = useBookStore();
   const lastElementRef = useRef<HTMLDivElement>(null);
-  const [books, setBooks] = useState<IBook[]>([]);
   const [pageNum, setPageNum] = useState(1);
   const { observe } = useIntersectionObserver(() => {
     setPageNum(page => page + 1);
@@ -29,17 +29,14 @@ export default function Home() {
 
   async function fetchData(pageNum: number) {
     try {
-      const responseData = await getBooksList("next", pageNum);
-      setBooks(prevBooks => [...prevBooks, ...responseData]);
+      const responseData = await fetchITBook(
+        "GET",
+        `/search/${keyword}/${pageNum}`,
+      );
+      addBooks(responseData.data.books);
     } catch (error) {
       console.error("Error fetching book data:", error);
     }
-  }
-
-  async function getBooksList(keyword: string, pageNum: number) {
-    const response = await fetchITBook("GET", `/search/${keyword}/${pageNum}`);
-
-    return response.data.books;
   }
 
   if (books.length < 1) {
