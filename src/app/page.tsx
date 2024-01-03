@@ -7,6 +7,7 @@ import useIntersectionObserver from "../utils/useIntersectionObserver";
 
 import Content from "@/components/Content";
 import Card from "@/components/Card";
+import Loading from "@/shared/Loading";
 
 export default function Home() {
   const lastElementRef = useRef<HTMLDivElement>(null);
@@ -17,7 +18,7 @@ export default function Home() {
   });
 
   useEffect(() => {
-    if (lastElementRef.current) {
+    if (lastElementRef.current && observe) {
       observe(lastElementRef.current);
     }
   }, [books]);
@@ -41,6 +42,14 @@ export default function Home() {
     return response.data.books;
   }
 
+  if (books.length < 1) {
+    return (
+      <div className="fixed flex justify-center items-center left-0 right-0 top-0 bottom-0">
+        <Loading />
+      </div>
+    );
+  }
+
   return (
     <>
       <Content>
@@ -56,6 +65,13 @@ export default function Home() {
             </div>
           );
         })}
+        <div
+          key={crypto.randomUUID()}
+          id={`loading`}
+          className="flex justify-center items-center w-1/3 h-100 p-4 text-base"
+        >
+          <Loading />
+        </div>
       </Content>
     </>
   );

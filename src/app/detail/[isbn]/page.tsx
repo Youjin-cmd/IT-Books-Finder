@@ -1,28 +1,18 @@
 "use client";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-
 import Image from "next/image";
 
+import { IBookDetail } from "@/types/type";
+
 import fetchITBook from "@/utils/fetchITBook";
+
+import Loading from "@/shared/Loading";
 
 function BookDetails() {
   const isbn13 = usePathname().split("/")[2];
 
-  const [bookDetail, setBookDetail] = useState({
-    title: "",
-    subtitle: "",
-    authors: "",
-    publisher: "",
-    isbn13: "",
-    pages: "",
-    year: "",
-    rating: "",
-    desc: "",
-    price: "",
-    image: "/",
-    url: "",
-  });
+  const [bookDetail, setBookDetail] = useState<IBookDetail | undefined>();
 
   useEffect(() => {
     async function fetchData() {
@@ -41,6 +31,14 @@ function BookDetails() {
     const response = await fetchITBook("GET", `/books/${isbn13}`);
 
     return response.data;
+  }
+
+  if (!bookDetail?.title) {
+    return (
+      <div className="fixed flex justify-center items-center left-0 right-0 top-0 bottom-0">
+        <Loading />
+      </div>
+    );
   }
 
   return (
