@@ -3,23 +3,16 @@
 import Image from "next/image";
 import Link from "next/link";
 
-interface IData {
-  title: string;
-  subtitle: string;
-  image: string;
-  url: string;
-}
+import { IBook } from "@/types/type";
 
 interface DataProps {
-  data: IData;
+  data: IBook;
 }
 
 function Card({ data }: DataProps) {
-  const urlData = data.url.split("/");
-
   return (
     <div className="w-1/3 h-100 p-4 text-base" onClick={() => {}}>
-      <Link href={`/book/${urlData[4]}`}>
+      <Link href={`/detail/${data.isbn13}`}>
         <Image
           src={data.image}
           alt={`book cover image: ${data.title}`}
