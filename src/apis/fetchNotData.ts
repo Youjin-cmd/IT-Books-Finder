@@ -4,7 +4,7 @@ async function fetchNotData(keywords: string[], pageNum: number) {
   const books = [];
 
   const keywordToSearch = keywords[0];
-  const keywordToAvoid = keywords[1];
+  const keywordToAvoid = keywords[1].toLowerCase();
 
   try {
     const response = await axios.get(`/search/${keywordToSearch}/${pageNum}`);
@@ -15,7 +15,7 @@ async function fetchNotData(keywords: string[], pageNum: number) {
   }
 
   const filteredBooks = books.filter(
-    book => !book.title.includes(keywordToAvoid),
+    book => !book.title.toLowerCase().includes(keywordToAvoid),
   );
 
   return filteredBooks;
