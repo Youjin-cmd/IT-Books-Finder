@@ -2,40 +2,32 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-
 import { IBookDetail } from "@/types/type";
 
-import fetchITBook from "@/utils/fetchITBook";
+import fetchBookDetail from "@/apis/fetchBookDetail";
 
 import Loading from "@/shared/Loading";
 
 function BookDetails() {
+  const [bookDetail, setBookDetail] = useState<IBookDetail | undefined>();
   const isbn13 = usePathname().split("/")[2];
 
-  const [bookDetail, setBookDetail] = useState<IBookDetail | undefined>();
-
   useEffect(() => {
-    async function fetchData() {
+    async function getBookDetail() {
       try {
-        const responseData = await getBookDetail(isbn13);
-        setBookDetail(responseData);
+        const response = await fetchBookDetail(isbn13);
+        setBookDetail(response);
       } catch (error) {
-        console.error("Error fetching book data:", error);
+        console.error("Error fetching book detail:", error);
       }
     }
 
-    fetchData();
+    getBookDetail();
   }, []);
-
-  async function getBookDetail(isbn13: string) {
-    const response = await fetchITBook("GET", `/books/${isbn13}`);
-
-    return response.data;
-  }
 
   if (!bookDetail?.title) {
     return (
-      <div className="fixed flex justify-center items-center left-0 right-0 top-0 bottom-0">
+      <div className="flex justify-center items-center left-0 right-0 top-0 bottom-0">
         <Loading />
       </div>
     );

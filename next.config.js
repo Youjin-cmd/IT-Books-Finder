@@ -14,6 +14,10 @@ const nextConfig = {
   async rewrites() {
     return [
       {
+        source: "/new",
+        destination: "https://api.itbook.store/1.0/new",
+      },
+      {
         source: "/search/:path*",
         destination: "https://api.itbook.store/1.0/search/:path*",
       },

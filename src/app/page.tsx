@@ -1,41 +1,63 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
-import fetchITBook from "../utils/fetchITBook";
-import useIntersectionObserver from "../utils/useIntersectionObserver";
 import useBookStore from "@/store/book";
+
+import fetchDefaultData from "@/apis/fetchDefaultData";
+import fetchOrData from "@/apis/fetchOrData";
+import fetchNotData from "@/apis/fetchNotData";
+import fetchInitialData from "@/apis/fetchInitialData";
+import useIntersectionObserver from "../utils/useIntersectionObserver";
 
 import Content from "@/components/Content";
 import Card from "@/components/Card";
 import Loading from "@/shared/Loading";
 
 export default function Home() {
-  const { books, addBooks, keyword } = useBookStore();
+  const { books, addBooks, keywords, searchType, pageNum, increasePageNum } =
+    useBookStore();
   const lastElementRef = useRef<HTMLDivElement>(null);
-  const [pageNum, setPageNum] = useState(1);
   const { observe } = useIntersectionObserver(() => {
-    setPageNum(page => page + 1);
+    increasePageNum();
   });
 
   useEffect(() => {
-    if (lastElementRef.current && observe) {
+    if (lastElementRef.current && observe && searchType !== "none") {
       observe(lastElementRef.current);
     }
   }, [books]);
 
   useEffect(() => {
-    fetchData(pageNum);
-  }, [pageNum]);
+    getBooks();
+  }, [pageNum, searchType]);
 
-  async function fetchData(pageNum: number) {
-    try {
-      const responseData = await fetchITBook(
-        "GET",
-        `/search/${keyword}/${pageNum}`,
-      );
-      addBooks(responseData.data.books);
-    } catch (error) {
-      console.error("Error fetching book data:", error);
+  async function getBooks() {
+    let data;
+
+    if (searchType === "none") {
+      data = await fetchInitialData();
+      addBooks(data);
+      return;
+    }
+
+    switch (searchType) {
+      case "warning":
+        alert("키워드는 두개까지 입력 가능합니다.");
+        break;
+
+      case "default":
+        data = await fetchDefaultData(keywords, pageNum);
+        addBooks(data);
+        break;
+
+      case "or":
+        data = await fetchOrData(keywords, pageNum);
+        addBooks(data);
+        break;
+
+      case "not":
+        data = await fetchNotData(keywords, pageNum);
+        addBooks(data);
     }
   }
 
@@ -62,13 +84,15 @@ export default function Home() {
             </div>
           );
         })}
-        <div
-          key={crypto.randomUUID()}
-          id={`loading`}
-          className="flex justify-center items-center w-1/3 h-100 p-4 text-base"
-        >
-          <Loading />
-        </div>
+        {searchType !== "none" && (
+          <div
+            key={crypto.randomUUID()}
+            id={`loading`}
+            className="flex justify-center items-center w-1/3 h-100 p-4 text-base"
+          >
+            <Loading />
+          </div>
+        )}
       </Content>
     </>
   );
