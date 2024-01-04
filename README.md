@@ -10,10 +10,21 @@
 
 ## preview
 
-<img width="800" src="https://github.com/Youjin-cmd/Youjin-cmd/assets/83858724/a4a0c634-3546-4243-ac92-ba2f61fe8bb2" />
-<img width="800" src="https://github.com/Youjin-cmd/Youjin-cmd/assets/83858724/e5f598c8-41c1-491e-83b1-3317698c541c" />
-<img width="800" src="https://github.com/Youjin-cmd/Youjin-cmd/assets/83858724/b7ff4d80-49aa-4736-9bcf-6e5d17ba418d" />
-<img width="800" src="https://github.com/Youjin-cmd/Youjin-cmd/assets/83858724/4c823558-edd0-486f-bb61-41874b2ae2db" />
+### 일반 키워드 검색<br>
+
+  <img width="800" src="https://github.com/Youjin-cmd/Youjin-cmd/assets/83858724/a4a0c634-3546-4243-ac92-ba2f61fe8bb2" />
+
+### Not(-)을 이용한 검색<br>
+
+  <img width="800" src="https://github.com/Youjin-cmd/Youjin-cmd/assets/83858724/e5f598c8-41c1-491e-83b1-3317698c541c" />
+
+### Or(|)을 이용한 검색<br>
+
+  <img width="800" src="https://github.com/Youjin-cmd/Youjin-cmd/assets/83858724/b7ff4d80-49aa-4736-9bcf-6e5d17ba418d" />
+
+### 상세 페이지<br>
+
+  <img width="800" src="https://github.com/Youjin-cmd/Youjin-cmd/assets/83858724/4c823558-edd0-486f-bb61-41874b2ae2db" />
 
 ## 기능
 
@@ -68,7 +79,7 @@ Next13과 10월에 출시된 Next14의 차이점으로 인해 시행착오를 �
 
 #### Github 이슈의 활용
 
-Issue탭을 처음 접해보면서, 서드파티를 이용하며 컨텍스트 전환을 하지 않고도 심도있는 프로젝트 관리가 가능함을 알았습니다. 다만 아직 사용법이 미숙해 제대로 활용하지 못했습니다. 브렌치 작성과 커밋 등을 이슈에 교차시켜야만 시너지가 나는듯 보이므로 issue탭 활용을 더 조사해서 익혀보고자 합니다.
+Issue탭을 처음 접해보면서, 서드파티툴 기용으로 컨텍스트 전환을 하지 않고도 심도있는 프로젝트 관리가 가능함을 알았습니다. 이번엔 사용법이 다소 미숙했으나 차후 Issue 및 기타 깃허브를 활용한 태스크관리기능들을 더 학습해서 깃헙 한 곳에서 프로젝트를 관리하는 것에 도전해보고 싶습니다.
 
 ## 프로젝트 설치 및 실행방법
 
