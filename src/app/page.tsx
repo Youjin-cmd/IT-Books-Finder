@@ -14,8 +14,15 @@ import Card from "@/components/Card";
 import Loading from "@/shared/Loading";
 
 export default function Home() {
-  const { books, addBooks, keywords, searchType, pageNum, increasePageNum } =
-    useBookStore();
+  const {
+    books,
+    addBooks,
+    renewBooks,
+    keywords,
+    searchType,
+    pageNum,
+    increasePageNum,
+  } = useBookStore();
   const lastElementRef = useRef<HTMLDivElement>(null);
   const { observe } = useIntersectionObserver(() => {
     increasePageNum();
@@ -36,7 +43,7 @@ export default function Home() {
 
     if (searchType === "none") {
       data = await fetchInitialData();
-      addBooks(data);
+      renewBooks(data);
       return;
     }
 
