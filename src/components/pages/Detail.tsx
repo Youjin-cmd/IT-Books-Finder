@@ -57,7 +57,13 @@ function Detail({ params }: DetailProps) {
               {bookDetail.subtitle ? ": " + bookDetail.subtitle + "." : "."}
             </h1>
             <h2 className="mb-3">{bookDetail.authors}</h2>
-            <span className="mb-3">rating: {bookDetail.rating}</span>
+            <span className="mb-3">
+              {bookDetail.rating === "1" && "★☆☆☆☆"}
+              {bookDetail.rating === "2" && "★★☆☆☆"}
+              {bookDetail.rating === "3" && "★★★☆☆"}
+              {bookDetail.rating === "4" && "★★★★☆"}
+              {bookDetail.rating === "5" && "★★★★★"}
+            </span>
           </div>
           <div className="flex justify-end">
             <span className="text-3xl">{bookDetail.price}</span>
