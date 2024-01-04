@@ -19,8 +19,11 @@ function Card({ data }: DataProps) {
         height={300}
         priority
       />
-      <h3 className="text-xl">{data.title}</h3>
-      <h4>{data.subtitle}</h4>
+      <h3 className="text-xl">
+        {data.title}
+        {data.subtitle ? ":" : "."}
+      </h3>
+      <h4>{data.subtitle && data.subtitle + "."}</h4>
     </Link>
   );
 }
