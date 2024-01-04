@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import useBookStore from "@/store/book";
 import processKeyword from "@/utils/processKeyword";
@@ -7,6 +8,7 @@ import processKeyword from "@/utils/processKeyword";
 import Button from "@/shared/Button";
 
 function SearchBar() {
+  const router = useRouter();
   const { setKeywords, setSearchType, resetData } = useBookStore();
   const [searchBarValue, setSearchBarValue] = useState("");
 
@@ -29,6 +31,7 @@ function SearchBar() {
     setKeywords(result.keywords);
     setSearchType(result.searchType);
     resetData();
+    router.push("/");
   }
 
   return (
