@@ -34,6 +34,12 @@ function SearchBar() {
     router.push("/");
   }
 
+  function handleKeyUp(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (event.key === "Enter") {
+      handleClickSearch();
+    }
+  }
+
   return (
     <div>
       <label className="w-10 h-5 text-white" htmlFor={"book-search"}>
@@ -44,6 +50,7 @@ function SearchBar() {
         className="h-6 ml-3 p-1 rounded-sm"
         type="text"
         onChange={event => handleChangeSearchBar(event)}
+        onKeyUp={event => handleKeyUp(event)}
       />
       <Button
         id="search-button"
