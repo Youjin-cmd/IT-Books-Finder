@@ -13,7 +13,7 @@
   },
   "overrides": [
     {
-      "files": ["next.config.js"],
+      "files": ["next.config.js", "postcss.config.js"],
       "parserOptions": {
         "project": null
       }
