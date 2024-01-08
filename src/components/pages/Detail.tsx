@@ -1,33 +1,25 @@
-"use client";
-import { useEffect, useState } from "react";
 import Image from "next/image";
-import { IBookDetail } from "@/types/type";
-
-import fetchBookDetail from "@/apis/fetchBookDetail";
 
 import Loading from "@/shared/Loading";
 
+interface BookDetail {
+  title: string;
+  subtitle: string;
+  authors: string;
+  image: string;
+  rating: string;
+  pages: string;
+  publisher: string;
+  price: string;
+  desc: string;
+}
+
 type DetailProps = {
-  params: { isbn: string };
+  bookDetail: BookDetail;
+  isbn13: string;
 };
 
-function Detail({ params }: DetailProps) {
-  const [bookDetail, setBookDetail] = useState<IBookDetail | undefined>();
-  const isbn13 = params.isbn;
-
-  useEffect(() => {
-    async function getBookDetail() {
-      try {
-        const response = await fetchBookDetail(isbn13);
-        setBookDetail(response);
-      } catch (error) {
-        console.error("Error fetching book detail:", error);
-      }
-    }
-
-    getBookDetail();
-  }, []);
-
+function Detail({ isbn13, bookDetail }: DetailProps) {
   if (!bookDetail?.title) {
     return (
       <div className="flex justify-center items-center left-0 right-0 top-0 bottom-0">
