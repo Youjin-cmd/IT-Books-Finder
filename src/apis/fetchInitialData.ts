@@ -1,9 +1,9 @@
-import axios from "axios";
-
 async function fetchInitialData() {
   try {
-    const response = await axios.get(`/new`);
-    return response.data.books;
+    const response = await fetch(`https://api.itbook.store/1.0/new`);
+    const parsedData = await response.json();
+
+    return parsedData.books;
   } catch (error) {
     console.error("Error fetching book data:", error);
     throw error;

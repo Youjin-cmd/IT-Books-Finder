@@ -1,5 +1,3 @@
-import axios from "axios";
-
 async function fetchNotData(keywords: string[], pageNum: number) {
   const books = [];
 
@@ -7,9 +5,12 @@ async function fetchNotData(keywords: string[], pageNum: number) {
   const keywordToAvoid = keywords[1].toLowerCase();
 
   try {
-    const response = await axios.get(`/search/${keywordToSearch}/${pageNum}`);
+    const response = await fetch(
+      `https://api.itbook.store/1.0/search/${keywordToSearch}/${pageNum}`,
+    );
+    const parsedData = await response.json();
 
-    books.push(...response.data.books);
+    books.push(...parsedData.books);
   } catch (error) {
     console.error("Error fetching book data:", error);
   }
