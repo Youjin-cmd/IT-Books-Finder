@@ -1,7 +1,10 @@
 import { Metadata } from "next";
 
+import fetchBookDetail from "@/apis/fetchBookDetail";
+
 import Loading from "@/shared/Loading";
 import Detail from "@/components/pages/Detail";
+
 interface Props {
   params: { isbn: string };
 }
@@ -10,16 +13,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const isbn13 = params.isbn;
 
   try {
-    const response = await fetch(
-      `https://api.itbook.store/1.0/books/${isbn13}`,
-    );
-    const data = await response.json();
+    const data = await fetchBookDetail(isbn13);
 
     return {
+      metadataBase: new URL("http://localhost:3000"),
+      title: data.title,
+      description: data.desc,
       openGraph: {
-        title: data.title,
-        description: data.desc,
-        siteName: "IT 북스 파인더",
         images: [
           {
             url: data.image,
@@ -27,8 +27,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             height: 600,
           },
         ],
-        locale: "en_US",
-        type: "website",
       },
     };
   } catch (error) {
@@ -42,8 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 async function DetailPage({ params }: Props) {
   const isbn13 = params.isbn;
-  const response = await fetch(`https://api.itbook.store/1.0/books/${isbn13}`);
-  const bookDetail = await response.json();
+  const bookDetail = await fetchBookDetail(isbn13);
 
   if (!bookDetail?.title) {
     return (
