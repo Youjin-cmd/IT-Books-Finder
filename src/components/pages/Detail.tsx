@@ -1,4 +1,5 @@
 import Image from "next/image";
+import he from "he";
 
 import Loading from "@/shared/Loading";
 
@@ -81,7 +82,7 @@ function Detail({ isbn13, bookDetail }: DetailProps) {
           </div>
         </div>
         <h3 className="mb-2 text-lg font-bold text-mattBlack">책소개</h3>
-        <p>{bookDetail.desc}</p>
+        <p>{he.decode(bookDetail.desc)}</p>
       </div>
     </div>
   );
