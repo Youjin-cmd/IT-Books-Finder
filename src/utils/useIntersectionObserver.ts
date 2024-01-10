@@ -20,6 +20,10 @@ function useIntersectionObserver(callback: () => void) {
   const observe = (element: HTMLDivElement) => {
     if (observer) {
       observer.observe(element);
+
+      return () => {
+        observer.disconnect();
+      };
     }
   };
 
