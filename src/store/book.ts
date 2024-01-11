@@ -18,7 +18,7 @@ const useBookStore = create<BookStore>(set => ({
   books: [],
   keywords: [""],
   pageNum: 1,
-  searchType: "none",
+  searchType: "new",
   addBooks: newList => {
     set(state => ({
       books: [...state.books, ...newList],

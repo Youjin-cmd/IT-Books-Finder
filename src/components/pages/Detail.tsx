@@ -1,6 +1,8 @@
 import Image from "next/image";
 import he from "he";
 
+import { BLUR_DATA_URL_BOOKCOVER } from "../../constant/constant";
+
 interface BookDetail {
   title: string;
   subtitle: string;
@@ -18,9 +20,6 @@ type DetailProps = {
   isbn13: string;
 };
 
-const blurDataURL =
-  "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mM8Vg8AAhEBRyBq48EAAAAASUVORK5CYII=+57cxlCTc/EIBM14FoNBqNRqPRaDQajeazWR3iP62K0ksnAAAAAElFTkSuQmCC";
-
 function Detail({ isbn13, bookDetail }: DetailProps) {
   return (
     <div className="h-screen">
@@ -32,7 +31,7 @@ function Detail({ isbn13, bookDetail }: DetailProps) {
             width={300}
             height={350}
             placeholder="blur"
-            blurDataURL={blurDataURL}
+            blurDataURL={BLUR_DATA_URL_BOOKCOVER}
           />
         </div>
         <div className="flex flex-col justify-evenly w-4/6 pl-10">

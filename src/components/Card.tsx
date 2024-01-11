@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { BLUR_DATA_URL_BOOKCOVER } from "../constant/constant";
+
 import { IBook } from "@/types/type";
 
 interface DataProps {
@@ -10,9 +12,6 @@ interface DataProps {
 }
 
 function Card({ data }: DataProps) {
-  const blurDataURL =
-    "data:image/gif;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mM8Vg8AAhEBRyBq48EAAAAASUVORK5CYII=";
-
   return (
     <Link href={`/detail/${data.isbn13}`}>
       <Image
@@ -21,7 +20,7 @@ function Card({ data }: DataProps) {
         width={300}
         height={350}
         placeholder="blur"
-        blurDataURL={blurDataURL}
+        blurDataURL={BLUR_DATA_URL_BOOKCOVER}
       />
       <h3 className="text-xl">
         {data.title}
