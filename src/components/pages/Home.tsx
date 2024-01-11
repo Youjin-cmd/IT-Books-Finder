@@ -34,7 +34,7 @@ function Home() {
 
   useEffect(() => {
     getBooks();
-  }, [pageNum, searchType]);
+  }, [pageNum, keywords]);
 
   if (isLoading === "new") {
     return (
