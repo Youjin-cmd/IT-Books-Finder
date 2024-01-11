@@ -9,7 +9,7 @@ import Button from "@/shared/Button";
 
 function SearchBar() {
   const router = useRouter();
-  const { setKeywords, setSearchType, resetData } = useBookStore();
+  const { setKeywords, setSearchType, resetPageData } = useBookStore();
   const [searchBarValue, setSearchBarValue] = useState("");
 
   function handleChangeSearchBar(event: React.ChangeEvent<HTMLInputElement>) {
@@ -30,7 +30,7 @@ function SearchBar() {
 
     setKeywords(result.keywords);
     setSearchType(result.searchType);
-    resetData();
+    resetPageData();
     router.push("/");
   }
 

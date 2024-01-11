@@ -10,15 +10,20 @@ interface BookStore {
   renewBooks: (newList: IBook[]) => void;
   setKeywords: (newKeywords: string[]) => void;
   increasePageNum: () => void;
-  resetData: () => void;
+  resetPageData: () => void;
   setSearchType: (newType: string) => void;
+  resetAllData: () => void;
 }
 
-const useBookStore = create<BookStore>(set => ({
+const initialState = {
   books: [],
   keywords: [""],
   pageNum: 1,
   searchType: "new",
+};
+
+const useBookStore = create<BookStore>(set => ({
+  ...initialState,
   addBooks: newList => {
     set(state => ({
       books: [...state.books, ...newList],
@@ -31,8 +36,9 @@ const useBookStore = create<BookStore>(set => ({
       pageNum: state.pageNum + 1,
     }));
   },
-  resetData: () => set({ pageNum: 1, books: [] }),
   setSearchType: newType => set({ searchType: newType }),
+  resetPageData: () => set({ pageNum: 1, books: [] }),
+  resetAllData: () => set(initialState),
 }));
 
 export default useBookStore;

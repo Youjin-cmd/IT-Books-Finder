@@ -96,7 +96,8 @@ describe("useBookStore", () => {
   });
 
   it("should reset data well", () => {
-    const { resetData, increasePageNum, renewBooks } = useBookStore.getState();
+    const { resetPageData, increasePageNum, renewBooks } =
+      useBookStore.getState();
     const newBooks: IBook[] = [
       {
         title: "Book 1",
@@ -110,7 +111,7 @@ describe("useBookStore", () => {
 
     increasePageNum();
     renewBooks(newBooks);
-    resetData();
+    resetPageData();
 
     const { pageNum, books } = useBookStore.getState();
 
