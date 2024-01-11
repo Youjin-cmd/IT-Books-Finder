@@ -10,14 +10,18 @@ interface DataProps {
 }
 
 function Card({ data }: DataProps) {
+  const blurDataURL =
+    "data:image/gif;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mM8Vg8AAhEBRyBq48EAAAAASUVORK5CYII=";
+
   return (
     <Link href={`/detail/${data.isbn13}`}>
       <Image
         src={data.image}
         alt={`book cover image: ${data.title}`}
         width={300}
-        height={300}
-        priority
+        height={350}
+        placeholder="blur"
+        blurDataURL={blurDataURL}
       />
       <h3 className="text-xl">
         {data.title}

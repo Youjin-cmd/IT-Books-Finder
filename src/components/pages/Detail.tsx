@@ -1,8 +1,6 @@
 import Image from "next/image";
 import he from "he";
 
-import Loading from "@/shared/Loading";
-
 interface BookDetail {
   title: string;
   subtitle: string;
@@ -20,15 +18,10 @@ type DetailProps = {
   isbn13: string;
 };
 
-function Detail({ isbn13, bookDetail }: DetailProps) {
-  if (!bookDetail?.title) {
-    return (
-      <div className="flex justify-center items-center left-0 right-0 top-0 bottom-0">
-        <Loading />
-      </div>
-    );
-  }
+const blurDataURL =
+  "data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mM8Vg8AAhEBRyBq48EAAAAASUVORK5CYII=+57cxlCTc/EIBM14FoNBqNRqPRaDQajeazWR3iP62K0ksnAAAAAElFTkSuQmCC";
 
+function Detail({ isbn13, bookDetail }: DetailProps) {
   return (
     <div className="h-screen">
       <div className="flex justify-center my-10">
@@ -36,11 +29,10 @@ function Detail({ isbn13, bookDetail }: DetailProps) {
           <Image
             alt={`book cover image: ${bookDetail.title}`}
             src={bookDetail.image}
-            width={0}
-            height={0}
-            sizes="100vw"
-            style={{ width: "auto", height: "350px" }}
-            priority
+            width={300}
+            height={350}
+            placeholder="blur"
+            blurDataURL={blurDataURL}
           />
         </div>
         <div className="flex flex-col justify-evenly w-4/6 pl-10">
