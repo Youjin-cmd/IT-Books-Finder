@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import useBookStore from "@/store/book";
 import processKeyword from "@/utils/processKeyword";
 
-import Button from "@/shared/Button";
+import Button from "./shared/Button";
 
 function SearchBar() {
   const router = useRouter();

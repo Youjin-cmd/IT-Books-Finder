@@ -2,8 +2,8 @@ import { Metadata } from "next";
 
 import fetchBookDetail from "@/apis/fetchBookDetail";
 
-import Loading from "@/shared/Loading";
 import Detail from "@/components/pages/Detail";
+import Loading from "@/components/shared/Loading";
 
 interface Props {
   params: { isbn: string };

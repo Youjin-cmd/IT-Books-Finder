@@ -8,7 +8,7 @@ import useIntersectionObserver from "../../utils/useIntersectionObserver";
 
 import Content from "@/components/Content";
 import Card from "@/components/Card";
-import Loading from "@/shared/Loading";
+import Loading from "../shared/Loading";
 
 function Home() {
   const { books, addBooks, keywords, searchType, pageNum, increasePageNum } =
