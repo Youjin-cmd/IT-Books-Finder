@@ -8,16 +8,19 @@ async function fetchBooksData(
 ) {
   switch (searchType) {
     case "new":
-      return await fetchNewData();
+      return fetchNewData();
 
-    case "default":
-      return await fetchSearchData(keywords[0], pageNum);
+    case "default": {
+      const searchParams = { keyword: keywords[0], pageNum };
+      return fetchSearchData(searchParams);
+    }
 
     case "or": {
       const books = [];
 
       for (const keyword of keywords) {
-        const result = await fetchSearchData(keyword, pageNum);
+        const searchParams = { keyword, pageNum };
+        const result = await fetchSearchData(searchParams);
 
         books.push(...result);
       }
@@ -27,11 +30,10 @@ async function fetchBooksData(
 
     case "not": {
       const books = [];
-
-      const keywordToSearch = keywords[0];
+      const searchParams = { keyword: keywords[0], pageNum };
       const keywordToAvoid = keywords[1].toLowerCase();
 
-      const result = await fetchSearchData(keywordToSearch, pageNum);
+      const result = await fetchSearchData(searchParams);
 
       books.push(...result);
 

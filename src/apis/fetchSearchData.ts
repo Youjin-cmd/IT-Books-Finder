@@ -1,4 +1,11 @@
-async function fetchSearchData(keyword: string, pageNum: number) {
+interface SearchParams {
+  keyword: string;
+  pageNum: number;
+}
+
+async function fetchSearchData(searchParams: SearchParams) {
+  const { keyword, pageNum } = searchParams;
+
   try {
     const response = await fetch(
       `https://api.itbook.store/1.0/search/${keyword}/${pageNum}`,
