@@ -40,39 +40,6 @@ describe("useBookStore", () => {
     expect(books).toEqual([...newBooks1, ...newBooks2]);
   });
 
-  it("should renew Books data well", () => {
-    const { renewBooks } = useBookStore.getState();
-    const newBooks1: IBook[] = [
-      {
-        title: "Book 1",
-        isbn13: "test",
-        price: "test",
-        subtitle: "test",
-        image: "test",
-        url: "test",
-      },
-    ];
-
-    renewBooks(newBooks1);
-
-    const newBooks2: IBook[] = [
-      {
-        title: "Book 1",
-        isbn13: "test",
-        price: "test",
-        subtitle: "test",
-        image: "test",
-        url: "test",
-      },
-    ];
-
-    renewBooks(newBooks2);
-
-    const { books } = useBookStore.getState();
-
-    expect(books).toEqual(newBooks2);
-  });
-
   it("should update keywords well", () => {
     const { setKeywords } = useBookStore.getState();
     const newKeywords = ["A", "B"];
@@ -96,7 +63,7 @@ describe("useBookStore", () => {
   });
 
   it("should reset data well", () => {
-    const { resetPageData, increasePageNum, renewBooks } =
+    const { resetPageData, increasePageNum, addBooks } =
       useBookStore.getState();
     const newBooks: IBook[] = [
       {
@@ -110,7 +77,7 @@ describe("useBookStore", () => {
     ];
 
     increasePageNum();
-    renewBooks(newBooks);
+    addBooks(newBooks);
     resetPageData();
 
     const { pageNum, books } = useBookStore.getState();
