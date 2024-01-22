@@ -1,4 +1,4 @@
-async function fetchInitialData() {
+async function fetchNewData() {
   try {
     const response = await fetch(`https://api.itbook.store/1.0/new`);
     const parsedData = await response.json();
@@ -10,4 +10,4 @@ async function fetchInitialData() {
   }
 }
 
-export default fetchInitialData;
+export default fetchNewData;

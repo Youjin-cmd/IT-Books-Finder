@@ -11,15 +11,8 @@ import Card from "@/components/Card";
 import Loading from "@/shared/Loading";
 
 function Home() {
-  const {
-    books,
-    addBooks,
-    renewBooks,
-    keywords,
-    searchType,
-    pageNum,
-    increasePageNum,
-  } = useBookStore();
+  const { books, addBooks, keywords, searchType, pageNum, increasePageNum } =
+    useBookStore();
   const [isLoading, setIsLoading] = useState("");
   const lastElementRef = useRef<HTMLDivElement>(null);
   const { observe } = useIntersectionObserver(() => {
@@ -48,7 +41,7 @@ function Home() {
     if (pageNum === 1) {
       setIsLoading("new");
       const books = await fetchBooksData(searchType, keywords, pageNum);
-      renewBooks(books);
+      addBooks(books);
       setIsLoading("");
 
       return;
@@ -78,7 +71,6 @@ function Home() {
       })}
       {isLoading === "more" && (
         <div
-          key={crypto.randomUUID()}
           id={`loading`}
           className="flex justify-center items-center w-1/3 h-100 p-4 text-base"
         >

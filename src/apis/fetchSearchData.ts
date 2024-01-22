@@ -1,7 +1,7 @@
-async function fetchDefaultData(keyword: string[], pageNum: number) {
+async function fetchSearchData(keyword: string, pageNum: number) {
   try {
     const response = await fetch(
-      `https://api.itbook.store/1.0/search/${keyword[0]}/${pageNum}`,
+      `https://api.itbook.store/1.0/search/${keyword}/${pageNum}`,
     );
     const parsedData = await response.json();
 
@@ -12,4 +12,4 @@ async function fetchDefaultData(keyword: string[], pageNum: number) {
   }
 }
 
-export default fetchDefaultData;
+export default fetchSearchData;
